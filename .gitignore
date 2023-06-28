@@ -3,3 +3,4 @@
 .vscode/
 
 outputs/
+benchmark_records/

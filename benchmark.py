@@ -42,6 +42,8 @@ def main(
     p.stop()
 
     session = p.last_session
+    print(f"Session took {session.cpu_time} seconds")
+
     html_renderer = HTMLRenderer(show_all=False, timeline=True)
     json_renderer = JSONRenderer(show_all=False, timeline=False)
 
