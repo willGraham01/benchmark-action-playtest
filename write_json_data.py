@@ -46,7 +46,7 @@ def record_duration_to_json(session_file: Path, output_file: Path = None):
 
     # Write output
     with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(data_to_dump, f, ensure_ascii=True, indent=4)
+        json.dump([data_to_dump], f, ensure_ascii=True, indent=4)
     return
 
 
