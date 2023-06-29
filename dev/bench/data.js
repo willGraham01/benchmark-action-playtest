@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1688030809170,
+  "lastUpdate": 1688030917104,
   "repoUrl": "https://github.com/willGraham01/benchmark-action-playtest",
   "entries": {
     "Benchmark": [
@@ -30,6 +30,36 @@ window.BENCHMARK_DATA = {
             "value": 0.002985,
             "unit": "Seconds",
             "extra": "(Profile timestamp) 2023-06-29_09:26:48,\n(Writing) timestamp 2023-06-29_09:26:48"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "32364977+willGraham01@users.noreply.github.com",
+            "name": "Will Graham",
+            "username": "willGraham01"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ffe895b7de8f44aef5b565968d36ccaf4c95926c",
+          "message": "Create README.md",
+          "timestamp": "2023-06-29T10:28:18+01:00",
+          "tree_id": "f2dfda93f958bb2e58e5df7ef766f2923efae64d",
+          "url": "https://github.com/willGraham01/benchmark-action-playtest/commit/ffe895b7de8f44aef5b565968d36ccaf4c95926c"
+        },
+        "date": 1688030916062,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "benchmark.py: Runtime",
+            "value": 0.003318,
+            "unit": "Seconds",
+            "extra": "(Profile timestamp) 2023-06-29_09:28:35,\n(Writing) timestamp 2023-06-29_09:28:35"
           }
         ]
       }
