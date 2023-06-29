@@ -5,6 +5,12 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  # deployments permission to GH-pages site
+  deployments: write
+  # contents permission to update GH-pages content
+  contents: write
+
 jobs:
   benchmark:
     name: Performance regression check
@@ -23,11 +29,11 @@ jobs:
           python benchmark.py
           python write_json_data.py ${{ github.workspace }}/outputs/benchmark_result.json ${{ github.workspace }}/benchmark_records/new_record.json
       # Download previous benchmark result from cache (if exists)
-      - name: Download previous benchmark data
-        uses: actions/cache@v3
-        with:
-          path: ${{ github.workspace }}/benchmark_cache
-          key: benchmark_data
+      # - name: Download previous benchmark data
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ${{ github.workspace }}/benchmark_cache
+      #     key: benchmark_data
       # Run `github-action-benchmark` action
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
@@ -36,8 +42,16 @@ jobs:
           tool: 'customSmallerIsBetter'
           # Where the output from the benchmark tool is stored
           output-file-path: ${{ github.workspace }}/benchmark_records/new_record.json
-          # Where the previous data file is stored
-          external-data-json-path: ${{ github.workspace }}/benchmark_cache/benchmark_data.json
+          # Access token to deploy to GH-pages branch
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # gh-pages branch name
+          # gh-pages-branch: gh-pages
+          # directory on gh-pages branch to place benchmark dashboard page
+          # benchmark-data-dir-path: /benchmark_results
+          # Where the previous data file is stored on GH-pages branch
+          # external-data-json-path: ${{ github.workspace }}/benchmark_cache/benchmark_data.json
           # Workflow will fail when an alert happens
           fail-on-alert: true
+          # Push and deploy automatically
+          auto-push: true
       # Upload the updated cache file for the next job by actions/cache
