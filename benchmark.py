@@ -16,7 +16,7 @@ def my_function() -> None:
     return
 
 
-def my_nested_function(n_chars: int = 5) -> str:
+def my_nested_function(n_chars: int = 16) -> str:
     return "".join(
         choice(string.ascii_lowercase + string.digits) for _ in range(n_chars)
     )
