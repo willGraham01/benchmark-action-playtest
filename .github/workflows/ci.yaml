@@ -47,7 +47,7 @@ jobs:
           # gh-pages branch name
           gh-pages-branch: gh-pages
           # directory on gh-pages branch to place benchmark dashboard page
-          benchmark-data-dir-path: /
+          benchmark-data-dir-path: ./
           # Workflow will fail when an alert happens
           fail-on-alert: true
           # Push and deploy automatically
