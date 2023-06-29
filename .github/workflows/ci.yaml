@@ -45,11 +45,9 @@ jobs:
           # Access token to deploy to GH-pages branch
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # gh-pages branch name
-          # gh-pages-branch: gh-pages
+          gh-pages-branch: gh-pages
           # directory on gh-pages branch to place benchmark dashboard page
-          # benchmark-data-dir-path: /benchmark_results
-          # Where the previous data file is stored on GH-pages branch
-          # external-data-json-path: ${{ github.workspace }}/benchmark_cache/benchmark_data.json
+          benchmark-data-dir-path: /
           # Workflow will fail when an alert happens
           fail-on-alert: true
           # Push and deploy automatically
