@@ -23,19 +23,12 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
 
-      # Run benchmark
       - name: Run benchmark
         run: |
-          python benchmark.py
-          python write_json_data.py ${{ github.workspace }}/outputs/benchmark_result.json ${{ github.workspace }}/benchmark_records/new_record.json
-      # Download previous benchmark result from cache (if exists)
-      # - name: Download previous benchmark data
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ${{ github.workspace }}/benchmark_cache
-      #     key: benchmark_data
-      # Run `github-action-benchmark` action
-      - name: Store benchmark result
+          python benchmark.py -m output_html/new_meta.json --html output_html/new.html
+          python write_json_data.py ${{ github.workspace }}/outputs/out.json ${{ github.workspace }}/benchmark_records/new_record.json
+
+      - name: Push benchmark result to pages
         uses: benchmark-action/github-action-benchmark@v1
         with:
           # What benchmark tool the output.txt came from
@@ -47,9 +40,14 @@ jobs:
           # gh-pages branch name
           gh-pages-branch: gh-pages
           # directory on gh-pages branch to place benchmark dashboard page
-          benchmark-data-dir-path: ./
+          benchmark-data-dir-path: ./benchmarking
           # Workflow will fail when an alert happens
           fail-on-alert: true
           # Push and deploy automatically
           auto-push: true
-      # Upload the updated cache file for the next job by actions/cache
+
+      - name: Push profiling results to pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: output_html
+          target-folder: ./profiling

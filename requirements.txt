@@ -1,1 +1,2 @@
+pypi-json
 pyinstrument
