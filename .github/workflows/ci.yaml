@@ -60,10 +60,10 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.TARGET_ACCESS_TOKEN }}
         with:
-          source_file: "output_html/"
+          source_file: output_html/*
           destination_repo: "willGraham01/benchmark-action-playtest-target"
           destination_folder: "./profiling"
           destination_branch: "target"
           user_email: ccaegra@ucl.ac.uk
           user_name: willGraham01
-          commit_message: "Commit results from ${GITHUB_REPOSITORY} @ ${GITHUB_SHA}"
+          commit_message: Commit results from ${GITHUB_REPOSITORY} @ ${GITHUB_SHA}
