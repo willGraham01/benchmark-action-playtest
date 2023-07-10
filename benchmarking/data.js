@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1688999455859,
+  "lastUpdate": 1688999661935,
   "repoUrl": "https://github.com/willGraham01/benchmark-action-playtest",
   "entries": {
     "Benchmark": [
@@ -358,6 +358,36 @@ window.BENCHMARK_DATA = {
             "value": 0.008551,
             "unit": "Seconds",
             "extra": "(Profile timestamp) 2023-07-10_14:30:55,\n(Writing) timestamp 2023-07-10_14:30:55"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "1willgraham@gmail.com",
+            "name": "willGraham01",
+            "username": "willGraham01"
+          },
+          "committer": {
+            "email": "1willgraham@gmail.com",
+            "name": "willGraham01",
+            "username": "willGraham01"
+          },
+          "distinct": true,
+          "id": "6a1b82b923bce4c11be368e0aa49584d949bc4b5",
+          "message": "See if recursive copying is allowed",
+          "timestamp": "2023-07-10T15:33:57+01:00",
+          "tree_id": "b9a967711bf6e27c76911a6f60b1821d778456db",
+          "url": "https://github.com/willGraham01/benchmark-action-playtest/commit/6a1b82b923bce4c11be368e0aa49584d949bc4b5"
+        },
+        "date": 1688999661472,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "benchmark.py -m outputs/6a1b82b923bce4c11be368e0aa49584d949bc4b5_meta.json --html outputs/6a1b82b923bce4c11be368e0aa49584d949bc4b5.html --json outputs/dump/out.json: Runtime",
+            "value": 0.006843,
+            "unit": "Seconds",
+            "extra": "(Profile timestamp) 2023-07-10_14:34:21,\n(Writing) timestamp 2023-07-10_14:34:21"
           }
         ]
       }
