@@ -46,11 +46,24 @@ jobs:
           # Push and deploy automatically
           auto-push: true
 
+      # - name: Push profiling results to pages
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     token: ${{ secrets.TARGET_ACCESS_TOKEN }}
+      #     folder: output_html
+      #     repository-name: willGraham01/benchmark-action-playtest-target
+      #     branch: target
+      #     target-folder: ./profiling
+
       - name: Push profiling results to pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: dmnemec/copy_file_to_another_repo_action@v1.1.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.TARGET_ACCESS_TOKEN }}
         with:
-          token: ${{ secrets.TARGET_ACCESS_TOKEN }}
-          folder: output_html
-          repository-name: willGraham01/benchmark-action-playtest-target
-          branch: target
-          target-folder: ./profiling
+          source_file: "output_html/"
+          destination_repo: "willGraham01/benchmark-action-playtest-target"
+          destination_folder: "./profiling"
+          destination_branch: "target"
+          user_email: ccaegra@ucl.ac.uk
+          user_name: willGraham01
+          commit_message: "Commit results from ${GITHUB_REPOSITORY} @ ${GITHUB_SHA}"
