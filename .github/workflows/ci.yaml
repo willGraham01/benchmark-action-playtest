@@ -25,7 +25,7 @@ jobs:
 
       - name: Run benchmark
         run: |
-          python benchmark.py -m output_html/new_meta_but_different.json --html output_html/new_but_different.html
+          python benchmark.py -m output_html/${GITHUB_SHA}_meta.json --html output_html/${GITHUB_SHA}.html
           python write_json_data.py ${{ github.workspace }}/outputs/out.json ${{ github.workspace }}/benchmark_records/new_record.json
 
       - name: Push benchmark result to pages
@@ -54,4 +54,3 @@ jobs:
           repository-name: willGraham01/benchmark-action-playtest-target
           branch: target
           target-folder: ./profiling
-          force: false
