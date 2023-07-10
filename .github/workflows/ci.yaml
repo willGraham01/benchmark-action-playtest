@@ -25,8 +25,8 @@ jobs:
 
       - name: Run benchmark
         run: |
-          python benchmark.py -m outputs/${GITHUB_SHA}_meta.json --html outputs/${GITHUB_SHA}.html
-          python write_json_data.py ${{ github.workspace }}/outputs/out.json ${{ github.workspace }}/benchmark_records/new_record.json
+          python benchmark.py -m outputs/${GITHUB_SHA}_meta.json --html outputs/${GITHUB_SHA}.html --json outputs/dump/out.json
+          python write_json_data.py ${{ github.workspace }}/outputs/dump/out.json ${{ github.workspace }}/benchmark_records/new_record.json
 
       - name: Push benchmark result to pages
         uses: benchmark-action/github-action-benchmark@v1
