@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1688998024536,
+  "lastUpdate": 1688998121257,
   "repoUrl": "https://github.com/willGraham01/benchmark-action-playtest",
   "entries": {
     "Benchmark": [
@@ -208,6 +208,36 @@ window.BENCHMARK_DATA = {
             "value": 0.009486,
             "unit": "Seconds",
             "extra": "(Profile timestamp) 2023-07-10_14:07:03,\n(Writing) timestamp 2023-07-10_14:07:03"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "1willgraham@gmail.com",
+            "name": "willGraham01",
+            "username": "willGraham01"
+          },
+          "committer": {
+            "email": "1willgraham@gmail.com",
+            "name": "willGraham01",
+            "username": "willGraham01"
+          },
+          "distinct": true,
+          "id": "9f869718ae5cea159922b6c695b7cdc0b5d6f9b0",
+          "message": "Use actual SHA, and try to trim folder",
+          "timestamp": "2023-07-10T15:08:12+01:00",
+          "tree_id": "7ea7ed2d2477ed11498cdcb3179e87a71b008fe9",
+          "url": "https://github.com/willGraham01/benchmark-action-playtest/commit/9f869718ae5cea159922b6c695b7cdc0b5d6f9b0"
+        },
+        "date": 1688998120418,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "benchmark.py -m output_html/9f869718ae5cea159922b6c695b7cdc0b5d6f9b0_meta.json --html output_html/9f869718ae5cea159922b6c695b7cdc0b5d6f9b0.html: Runtime",
+            "value": 0.008891,
+            "unit": "Seconds",
+            "extra": "(Profile timestamp) 2023-07-10_14:08:40,\n(Writing) timestamp 2023-07-10_14:08:40"
           }
         ]
       }
