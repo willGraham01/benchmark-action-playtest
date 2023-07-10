@@ -49,5 +49,9 @@ jobs:
       - name: Push profiling results to pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ secrets.TARGET_ACCESS_TOKEN }}
           folder: output_html
+          repository-name: willGraham01/benchmark-action-playtest-target
+          branch: target
           target-folder: ./profiling
+          force: false
