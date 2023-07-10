@@ -66,4 +66,3 @@ jobs:
           destination_branch: 'target'
           user_email: ccaegra@ucl.ac.uk
           user_name: willGraham01
-          commit_message: 'Commit results from ${GITHUB_REPOSITORY} @ ${GITHUB_SHA}'
