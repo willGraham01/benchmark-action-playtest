@@ -25,7 +25,7 @@ jobs:
 
       - name: Run benchmark
         run: |
-          python benchmark.py -m output_html/${GITHUB_SHA}_meta.json --html output_html/${GITHUB_SHA}.html
+          python benchmark.py -m outputs/${GITHUB_SHA}_meta.json --html outputs/${GITHUB_SHA}.html
           python write_json_data.py ${{ github.workspace }}/outputs/out.json ${{ github.workspace }}/benchmark_records/new_record.json
 
       - name: Push benchmark result to pages
@@ -60,10 +60,10 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.TARGET_ACCESS_TOKEN }}
         with:
-          source_file: output_html/${GITHUB_SHA}_meta.json output_html/${GITHUB_SHA}.html
-          destination_repo: "willGraham01/benchmark-action-playtest-target"
-          destination_folder: "./profiling"
-          destination_branch: "target"
+          source_file: 'outputs'
+          destination_repo: 'willGraham01/benchmark-action-playtest-target'
+          destination_folder: '.'
+          destination_branch: 'target'
           user_email: ccaegra@ucl.ac.uk
           user_name: willGraham01
-          commit_message: Commit results from ${GITHUB_REPOSITORY} @ ${GITHUB_SHA}
+          commit_message: 'Commit results from ${GITHUB_REPOSITORY} @ ${GITHUB_SHA}'
