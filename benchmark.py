@@ -25,10 +25,6 @@ def append_suffix(p: Path, ext: str) -> Path:
 
 
 def write_metadata(fname: Path = "meta.json", **kwargs) -> None:
-    if fname.suffix != ".json":
-        fname = fname.parent / f"{fname.stem}.json"
-    print(f"Writing metadata to {fname}", end="...", flush=True)
-
     metadata = {"timestamp": datetime.utcnow().strftime("%Y-%m-%d_%H%M")}
     for key, value in kwargs.items():
         if isinstance(value, Path):
@@ -54,6 +50,7 @@ def run_profiling(
     write_stats: bool = True,
     write_html: bool = False,
     write_json: bool = False,
+    n_reps: int = 25,
 ) -> None:
     # Create the directory that this profiling run will live in
     output_dir = output_dir / current_time("%Y/%m/%d/%H%M")
@@ -77,7 +74,8 @@ def run_profiling(
 
     # Profile scale_run
     p.start()
-    my_function()
+    for i in range(n_reps):
+        my_function()
     p.stop()
 
     print(f"[{current_time('%H:%M:%S')}:INFO] Profiling runs complete")
@@ -148,6 +146,13 @@ if __name__ == "__main__":
         type=Path,
         help="Name to give to the output file(s). File extensions will automatically appended.",
         default=None,
+    )
+    parser.add_argument(
+        "-n",
+        type=int,
+        help="Number of function calls.",
+        dest="n_reps",
+        default="25",
     )
 
     args = parser.parse_args()

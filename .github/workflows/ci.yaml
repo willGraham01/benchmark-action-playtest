@@ -27,34 +27,27 @@ jobs:
         run: |
           UNIQUE_ID=${GITHUB_EVENT_NAME}_${GITHUB_RUN_NUMBER}_${GITHUB_SHA} >> $GITHUB_ENV
           python benchmark.py --pyis --stats --json --output_dir outputs/ --output_name ${UNIQUE_ID}
-          python write_json_data.py ${{ github.workspace }}/outputs/${UNIQUE_ID}.json ${{ github.workspace }}/benchmark_records/new_record.json
+        
+      # Writing benchmarks to move to deployment/target repo
+      # python write_json_data.py ${{ github.workspace }}/outputs/${UNIQUE_ID}.json ${{ github.workspace }}/benchmark_records/new_record.json
 
-      - name: Push benchmark result to pages
-        uses: benchmark-action/github-action-benchmark@v1
-        with:
-          # What benchmark tool the output.txt came from
-          tool: 'customSmallerIsBetter'
-          # Where the output from the benchmark tool is stored
-          output-file-path: ${{ github.workspace }}/benchmark_records/new_record.json
-          # Access token to deploy to GH-pages branch
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          # gh-pages branch name
-          gh-pages-branch: gh-pages
-          # directory on gh-pages branch to place benchmark dashboard page
-          benchmark-data-dir-path: ./benchmarking
-          # Workflow will fail when an alert happens
-          fail-on-alert: true
-          # Push and deploy automatically
-          auto-push: true
-
-      # - name: Push profiling results to pages
-      #   uses: JamesIves/github-pages-deploy-action@v4
+      # - name: Push benchmark result to pages
+      #   uses: benchmark-action/github-action-benchmark@v1
       #   with:
-      #     token: ${{ secrets.TARGET_ACCESS_TOKEN }}
-      #     folder: output_html
-      #     repository-name: willGraham01/benchmark-action-playtest-target
-      #     branch: target
-      #     target-folder: ./profiling
+      #     # What benchmark tool the output.txt came from
+      #     tool: 'customSmallerIsBetter'
+      #     # Where the output from the benchmark tool is stored
+      #     output-file-path: ${{ github.workspace }}/benchmark_records/new_record.json
+      #     # Access token to deploy to GH-pages branch
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     # gh-pages branch name
+      #     gh-pages-branch: gh-pages
+      #     # directory on gh-pages branch to place benchmark dashboard page
+      #     benchmark-data-dir-path: ./benchmarking
+      #     # Workflow will fail when an alert happens
+      #     fail-on-alert: true
+      #     # Push and deploy automatically
+      #     auto-push: true
 
       - name: Push profiling results to pages
         uses: dmnemec/copy_file_to_another_repo_action@v1.1.1
