@@ -25,8 +25,9 @@ jobs:
 
       - name: Run benchmark
         run: |
-          python benchmark.py -m outputs/${GITHUB_RUN_NUMBER}_${GITHUB_SHA}_meta.json --html outputs/${GITHUB_RUN_NUMBER}_${GITHUB_SHA}.html --json outputs/dump/${GITHUB_RUN_NUMBER}_${GITHUB_SHA}.json
-          python write_json_data.py ${{ github.workspace }}/outputs/dump/${GITHUB_RUN_NUMBER}_${GITHUB_SHA}.json ${{ github.workspace }}/benchmark_records/new_record.json
+          UNIQUE_ID=${GITHUB_EVENT_NAME}_${GITHUB_RUN_NUMBER}_${GITHUB_SHA} >> $GITHUB_ENV
+          python benchmark.py --pyis --stats --json --output_dir outputs/ --output_name ${UNIQUE_ID}
+          python write_json_data.py ${{ github.workspace }}/outputs/${UNIQUE_ID}.json ${{ github.workspace }}/benchmark_records/new_record.json
 
       - name: Push benchmark result to pages
         uses: benchmark-action/github-action-benchmark@v1
