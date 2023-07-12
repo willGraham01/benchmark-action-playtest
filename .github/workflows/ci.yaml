@@ -26,7 +26,7 @@ jobs:
       - name: Run benchmark
         run: |
           UNIQUE_ID=${GITHUB_EVENT_NAME}_${GITHUB_RUN_NUMBER}_${GITHUB_SHA} >> $GITHUB_ENV
-          python benchmark.py --pyis --stats --json --output_dir outputs/ --output_name ${UNIQUE_ID}
+          python benchmark.py --pyis --stats --json --output_dir outputs/ --output_name ${UNIQUE_ID} -n 250
         
       # Writing benchmarks to move to deployment/target repo
       # python write_json_data.py ${{ github.workspace }}/outputs/${UNIQUE_ID}.json ${{ github.workspace }}/benchmark_records/new_record.json
