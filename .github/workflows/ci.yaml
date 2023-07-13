@@ -60,3 +60,10 @@ jobs:
           destination_branch: 'target'
           user_email: ccaegra@ucl.ac.uk
           user_name: willGraham01
+
+      - name: Trigger website rebuild
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.TARGET_ACCESS_TOKEN }}
+          repository: willGraham01/benchmark-action-playtest-target
+          event-type: new-profiling-results
