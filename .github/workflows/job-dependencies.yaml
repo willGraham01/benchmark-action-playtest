@@ -23,10 +23,11 @@ jobs:
   dependent-job:
     name: Only if one of the two earlier jobs ran
     runs-on: ubuntu-latest
+    needs: [job-1, job-2]
     if: |
       always() &&
-      (jobs.job-1.result == 'success' || jobs.job-1.result == 'skipped') &&
-      (jobs.job-2.result == 'skipped' || jobs.job-2.result == 'success') &&
-      !(jobs.job-1.result == 'skipped' && jobs.job-2.result == 'skipped')
+      (needs.job-1.result == 'success' || needs.job-1.result == 'skipped') &&
+      (needs.job-2.result == 'skipped' || needs.job-2.result == 'success') &&
+      !(needs.job-1.result == 'skipped' && needs.job-2.result == 'skipped')
     steps:
       - run: echo "Ran the dependent job"
