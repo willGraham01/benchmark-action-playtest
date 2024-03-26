@@ -17,10 +17,26 @@ concurrency:
   group: fetch-sha-${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  check-if-pr-comment:
+    name: Check if this is a PR comment
+    runs-on: ubuntu-latest
+    if: (github.event_name != 'issue_comment') || ((github.event_name == 'issue_comment') && (github.event.comment.body == '/report sha!'))
+    outputs:
+      is-pr-comment: ${{ steps.determine-if-pr-comment.outputs.is-pr }}
+    steps:
+      - id: determine-if-pr-comment
+        run: |
+          if [ -z "${{ github.event.issue.pull_request }}" ] \
+            then \
+              echo "is-pr=true" >> "${GITHUB_OUTPUT}" \
+            else \
+              echo "is-pr=false" >> "${GITHUB_OUTPUT}" \
+            fi
+
   set-variables:
     name: Create unique output file identifier and artifact name
     runs-on: ubuntu-latest
-    if: (github.event_name != 'issue_comment') || ((github.event_name == 'issue_comment') && (github.event.comment.body == '/report sha!'))
+    needs: check-if-pr-comment
     outputs:
       sha: ${{ steps.determine-correct-sha.outputs.result }}
     steps:
@@ -29,7 +45,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if (!${{ github.event.issue.pull_request }}) {
+            if (!${{ needs.check-if-pr-comment.outputs.is-pr-comment }}) {
               return context.sha;
             };
             const { data: pr } = await github.rest.pulls.get({
