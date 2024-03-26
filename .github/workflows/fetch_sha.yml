@@ -32,7 +32,6 @@ jobs:
             if (!context.payload.issue.pull_request) {
               return context.sha;
             };
-            return "I am here";
             const { data: pr } = await github.rest.pulls.get({
               owner: context.issue.owner,
               repo: context.issue.repo,
@@ -51,5 +50,5 @@ jobs:
       - id: set-profiling-filename
         name: Set profiling output file name
         run: |
-          echo "name=${GITHUB_EVENT_NAME}
+          echo "name=${GITHUB_EVENT_NAME}"
           echo "SHA=${{ needs.set-variables.outputs.sha }}"
