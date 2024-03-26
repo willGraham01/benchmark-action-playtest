@@ -1,0 +1,54 @@
+name: Test context throws
+
+on:
+  workflow_dispatch:
+  # Allow profiling to be triggered by comments on pull requests
+  # Trigger is /run profiling
+  issue_comment:
+    types:
+      - created
+  # Profile the model every Saturday at 00:00, 
+  # on the HEAD of master
+  push:
+    branches:
+      - "main"
+
+concurrency:
+  group: fetch-sha-${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  set-variables:
+    name: Create unique output file identifier and artifact name
+    runs-on: ubuntu-latest
+    if: (github.event_name != 'issue_comment') || ((github.event_name == 'issue_comment') && (github.event.comment.body == '/report sha!'))
+    outputs:
+      sha: ${{ steps.determine-correct-sha.outputs.result }}
+    steps:
+      - id: determine-correct-sha
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            if (!context.payload.issue.pull_request) {
+              return context.sha;
+            };
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.issue.owner,
+              repo: context.issue.repo,
+              pull_number: context.issue.number,
+            });
+            return pr.head.sha;
+
+  report-sha:
+    name: Report SHA that was recovered
+    runs-on: ubuntu-latest
+    needs: set-variables
+    steps:
+      - name: Report SHA
+        run: |
+          echo ""
+      - id: set-profiling-filename
+        name: Set profiling output file name
+        run: |
+          echo "name=${GITHUB_EVENT_NAME}
+          echo "SHA=${{ needs.set-variables.outputs.sha }}"
