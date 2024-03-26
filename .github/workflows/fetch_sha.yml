@@ -32,6 +32,7 @@ jobs:
             if (!context.payload.issue.pull_request) {
               return context.sha;
             };
+            return "I am here";
             const { data: pr } = await github.rest.pulls.get({
               owner: context.issue.owner,
               repo: context.issue.repo,
