@@ -18,3 +18,5 @@ Output files from profiling have the same filenames but different extensions to 
 
 To work, this repository need a `PAT` token available as an `actions` secret.
 Said `PAT` token needs at least read/write access to the `contents` of the target repository, as well as `metadata` read permissions (as otherwise the website rebuild cannot be triggered).
+
+**THIS BRANCH EXISTS SO I CAN CHECK PR THINGS**
