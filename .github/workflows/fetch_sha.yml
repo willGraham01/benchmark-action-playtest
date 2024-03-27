@@ -40,7 +40,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if (${{ needs.check-if-pr-comment.outputs.is-pr-comment }} == "true") {
+            if ("${{ needs.check-if-pr-comment.outputs.is-pr-comment }}" === "true") {
               const { data: pr } = await github.rest.pulls.get({
                 owner: context.issue.owner,
                 repo: context.issue.repo,
