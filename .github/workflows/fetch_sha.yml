@@ -40,15 +40,15 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if (!${{ needs.check-if-pr-comment.outputs.is-pr-comment }}) {
-              return context.sha;
+            if (${{ needs.check-if-pr-comment.outputs.is-pr-comment }} == "true") {
+              const { data: pr } = await github.rest.pulls.get({
+                owner: context.issue.owner,
+                repo: context.issue.repo,
+                pull_number: context.issue.number,
+              });
+              return pr.head.sha;
             };
-            const { data: pr } = await github.rest.pulls.get({
-              owner: context.issue.owner,
-              repo: context.issue.repo,
-              pull_number: context.issue.number,
-            });
-            return pr.head.sha;
+            return context.sha;
 
   report-sha:
     name: Report SHA that was recovered
