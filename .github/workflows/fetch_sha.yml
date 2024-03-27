@@ -26,12 +26,7 @@ jobs:
     steps:
       - id: determine-if-pr-comment
         run: |
-          if [ -z "${{ github.event.issue.pull_request }}" ] \
-            then \
-              echo "is-pr=true" >> "${GITHUB_OUTPUT}" \
-            else \
-              echo "is-pr=false" >> "${GITHUB_OUTPUT}" \
-            fi
+          if [ -z "${{ github.event.issue.pull_request }}" ]; then echo "is-pr=true" >> "${GITHUB_OUTPUT}"; else echo "is-pr=false" >> "${GITHUB_OUTPUT}"; fi
 
   set-variables:
     name: Create unique output file identifier and artifact name
